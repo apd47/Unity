@@ -4,7 +4,6 @@ Shader "Hidden/BarrelDistortion" {
 		_FOV ("FOV", float) = 1.48
 	}
 	
-	// Shader code pasted into all further CGPROGRAM blocks
 	CGINCLUDE
 	
 	#include "UnityCG.cginc"
@@ -29,15 +28,15 @@ Shader "Hidden/BarrelDistortion" {
 	half4 frag(v2f i) : SV_Target 
 	{
 		float2 uv = i.uv - 0.5;
-        float z = sqrt(1.0 - uv.x * uv.x - uv.y * uv.y);
-        float a = 1.0 / (z * tan(_FOV * 0.5));
-        float4 c;
-        float2 uv2 = (uv * a) + 0.5;
-        if(uv2.x>=1 || uv2.y>=1 || uv2.x<=0 || uv2.y<=0) 
-        c = float4(0,0,0,1);
-        else 
-        c = tex2D(_MainTex, uv2);
-        return c;
+		float z = sqrt(1.0 - uv.x * uv.x - uv.y * uv.y);
+		float a = 1.0 / (z * tan(_FOV * 0.5));
+		float4 c;
+		float2 uv2 = (uv * a) + 0.5;
+		if(uv2.x>=1 || uv2.y>=1 || uv2.x<=0 || uv2.y<=0) 
+		c = float4(0,0,0,1);
+		else 
+		c = tex2D(_MainTex, uv2);
+		return c;
 	}
 
 	ENDCG 
